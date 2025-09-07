@@ -4,13 +4,13 @@ import type { ScrambleWordsState } from "@/interfaces"
 import type { ScrambleWordsAction } from "@/types";
 
 interface Props {
-    state : ScrambleWordsState;
-    dispatch : ActionDispatch<[action : ScrambleWordsAction]>;
-    numberWords : number;
+    state: ScrambleWordsState;
+    dispatch: ActionDispatch<[action: ScrambleWordsAction]>;
+    numberWords: number;
 }
 
-export function Winner({state, dispatch, numberWords} : Props) {
-    const {points, errorCounter, skipCounter} = state;
+export function EndWord({ state, dispatch, numberWords }: Props) {
+    const { points, errorCounter, skipCounter, clueCounter } = state;
     return (
         <>
             <div className="min-h-screen bg-gradient-to-br from-purple-100 via-blue-50 to-indigo-100 flex items-center justify-center p-4">
@@ -25,6 +25,8 @@ export function Winner({state, dispatch, numberWords} : Props) {
                     <div>Errores: {errorCounter}</div>
                     <br />
                     <div>Saltos: {skipCounter}</div>
+                    <br />
+                    <div>Pistas: {clueCounter}</div>
                     <br />
                     <Button className='cursor-pointer' onClick={() => dispatch({ type: 'PLAY_AGAIN', payload: numberWords })}>Jugar de nuevo</Button>
                 </div>

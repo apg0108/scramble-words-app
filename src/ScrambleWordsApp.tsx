@@ -1,8 +1,8 @@
 import { useEffect, useReducer, useState } from 'react';
-import confetti from 'canvas-confetti';
 import { ScrambleWordsReducer } from './reducer/scrambleWordsReducer';
+import confetti from 'canvas-confetti';
+import { ActionButton, Guess, Header, Stats, EndWord } from './components/core';
 import { Card, CardContent } from '@/components/ui';
-import { ActionButton, Guess, Header, Stats, Winner } from './components/core';
 import { ScrambleWord } from './components/core/ScrambleWord';
 import { getInitialState } from './utils/utilsFunction';
 
@@ -45,7 +45,7 @@ export function ScrambleWordsApp() {
                             </Card>
                         </div>
                     </div>
-                ) : <Winner state={state} dispatch={dispatch} numberWords={numberWords} />
+                ) : <EndWord state={state} dispatch={dispatch} numberWords={numberWords} />
             }
 
         </>

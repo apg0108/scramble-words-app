@@ -8,7 +8,7 @@ export function ScrambleWordsReducer(state: ScrambleWordsState, action: Scramble
         case 'CHECK_WORD': {
             if (state.guess === state.realWord) {
                 const words = shuffleArray(state.words.filter(word => word !== action.payload));
-                //if (state.words.length === 1) return { ...state, points: state.points + 1, isGameOver: true };
+                if (words.length === 0) return {...state , points: state.points + 1, words: []};  
                 return {
                     ...state, words: words, realWord: words.at(0)!, scrambledWord: scrambleWord(words.at(0)!),
                     guess: '', points: state.points + 1, lettersClue: new Map()
@@ -20,12 +20,12 @@ export function ScrambleWordsReducer(state: ScrambleWordsState, action: Scramble
             };
         }
         case "SKIP": {
-            const words = shuffleArray(state.words.filter(word => word !== state.realWord));
-            //if (state.words.length === 1) return { ...state, skipCounter: state.skipCounter + 1, isGameOver: true };
+            const words = shuffleArray(state.words.filter(word => word !== state.realWord));         
+            if (words.length === 0) return {...state , skipCounter : state.skipCounter + 1, words: []};
             if (state.skipCounter + 1 >= state.maxSkips) return { ...state, skipCounter: state.skipCounter + 1, isGameOver: true };
             return {
                 ...state, words: words, realWord: words.at(0)!, scrambledWord: scrambleWord(words.at(0)),
-                guess: '', skipCounter: state.skipCounter + 1, clueCounter: 0, lettersClue: new Map()
+                guess: '', skipCounter: state.skipCounter + 1, lettersClue: new Map()
             };
         }
         case "CLUE": {

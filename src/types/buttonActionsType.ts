@@ -1,0 +1,1 @@
+export type ButtonActionsType = 'SKIP' | 'PLAY_AGAIN';

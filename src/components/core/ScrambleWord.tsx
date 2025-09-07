@@ -1,11 +1,12 @@
 import type { ScrambleWordsState } from "@/interfaces"
+import { getWordClue } from "@/utils/utilsFunction";
 
 interface Props {
-    state : ScrambleWordsState;    
+    state: ScrambleWordsState;
 }
 
-export function ScrambleWord({state} : Props) { 
-    const {realWord, isGameOver, scrambledWord} = state;
+export function ScrambleWord({ state }: Props) {
+    const { realWord, isGameOver, scrambledWord, lettersClue } = state;
     return (
         <>
             {/* Scrambled Word Display */}
@@ -31,6 +32,24 @@ export function ScrambleWord({state} : Props) {
                         </div>
                     ))}
                 </div>
+                {
+                    lettersClue.size > 0 && (
+                        <div className="flex justify-center gap-2 mb-6">
+                            {getWordClue(state.lettersClue, state.realWord.length).split('').map((letter, index) => (
+                                <div
+                                    key={index}
+                                    className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg transform hover:scale-105 transition-transform duration-200"
+                                    style={{
+                                        animationDelay: `${index * 0.1}s`,
+                                        animation: 'fadeInUp 0.6s ease-out forwards',
+                                    }}
+                                >
+                                    {letter}
+                                </div>
+                            ))}
+                        </div>
+                    )
+                }
             </div>
         </>
     )

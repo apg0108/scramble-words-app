@@ -1,1 +1,1 @@
-export type ButtonActionsType = 'SKIP' | 'PLAY_AGAIN';
+export type ButtonActionsType = 'SKIP' | 'PLAY_AGAIN' | 'CLUE';
